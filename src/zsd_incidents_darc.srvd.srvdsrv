@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service Definition Entity incidents'
+define service Zsd_incidents_darc {
+  expose zc_inct_darc     as Incidents;
+  expose zi_inct_h_darc   as Historic;
+  expose zi_inct_priority as Priority;
+  expose zi_inct_status   as Status;
+}
