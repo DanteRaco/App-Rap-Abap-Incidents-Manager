@@ -1,0 +1,30 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for zc_inct_darc alias incident
+{
+  use create;
+  use update;
+  use delete;
+
+  use action changeStatus;
+  use action validateFields;
+  use action validateDates;
+
+  use action Activate;
+  use action Discard;
+  use action Edit;
+  use action Resume;
+  use action Prepare;
+
+  use association _IHistory { create; with draft; }
+}
+
+define behavior for zc_hist_inct_darc alias history
+{
+  use update;
+  use delete;
+
+  use association _Incident { with draft; }
+}
