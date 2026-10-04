@@ -1,7 +1,7 @@
 @EndUserText.label: 'Service Definition Entity incidents'
 define service Zsd_incidents_darc {
-  expose zc_inct_darc     as Incidents;
-  expose zi_inct_h_darc   as Historic;
-  expose zi_inct_priority as Priority;
-  expose zi_inct_status   as Status;
+  expose zc_inct_darc        as Incidents;
+  expose zc_hist_inct_darc   as Historyc;
+  expose zd_inc_prior_darc   as Priority;
+  expose zd_inct_status_darc as Status;
 }

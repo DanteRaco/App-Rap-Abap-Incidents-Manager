@@ -1,0 +1,109 @@
+managed implementation in class zbp_r_inct_darc unique;
+strict ( 2 );
+with draft;
+
+define behavior for z_r_inct_darc alias incident
+persistent table zdt_inct_darc
+draft table zdt_inct_darc_d
+lock master
+total etag LastChangedAt
+etag master LocalLastChangedAt
+
+authorization master ( global, instance )
+
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( numbering : managed, readonly ) IncUuid;
+
+  field ( readonly ) IncidentId,
+  Status,
+  ChangedDate,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( mandatory ) Title, Description, Priority;
+
+  action ( features : instance, authorization : update ) changeStatus
+    parameter zabs_changestatus_darc result [1] $self;
+
+  association _IHistory { create ( features : instance ); with draft; }
+
+  determination initialHistory on save { create; }
+  determination setInitialValues on modify { create; }
+
+  side effects { action changeStatus affects field Status, entity _IHistory; }
+
+  validation validateRequiredFields on save { create; }
+  validation validateDateRange on save { create; update; }
+
+  determine action validateFields { validation validateRequiredFields; }
+  determine action validateDates { validation validateDateRange; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  { validation validateRequiredFields;
+    validation validateDateRange; }
+
+  mapping for zdt_inct_darc
+    {
+      incuuid            = inc_uuid;
+      incidentid         = incident_id;
+      title              = title;
+      description        = description;
+      status             = status;
+      priority           = priority;
+      creationdate       = creation_date;
+      changeddate        = changed_date;
+      localcreatedby     = local_created_by;
+      localcreatedat     = local_created_at;
+      locallastchangedby = local_last_changed_by;
+      locallastchangedat = local_last_changed_at;
+      lastchangedat      = last_changed_at;
+    } }
+
+define behavior for zi_inct_h_darc alias history
+persistent table zdt_inct_h_darc
+draft table zdt_inct_h_darcd
+lock dependent by _Incident
+authorization dependent by _Incident
+etag master LastChangedAt
+
+{
+  update;
+  delete;
+  field ( numbering : managed, readonly ) HisUuid;
+
+  field ( readonly )
+  IncUuid,
+  LocalCreatedAt,
+  LocalCreatedBy,
+  LocalLastChangedAt,
+  LocalLastChangedBy;
+
+  association _Incident { with draft; }
+
+  mapping for zdt_inct_h_darc
+    {
+      hisuuid            = his_uuid;
+      incuuid            = inc_uuid;
+      hisid              = his_id;
+      previousstatus     = previous_status;
+      newstatus          = new_status;
+      Text               = text;
+      localcreatedby     = local_created_by;
+      localcreatedat     = local_created_at;
+      locallastchangedby = local_last_changed_by;
+      locallastchangedat = local_last_changed_at;
+      lastchangedat      = last_changed_at;
+    }
+
+}

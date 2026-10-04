@@ -36,6 +36,7 @@ CLASS zcl_initial IMPLEMENTATION.
 
     ELSE.
 
+
       out->write( 'No codes inserted' ).
 
     ENDIF.

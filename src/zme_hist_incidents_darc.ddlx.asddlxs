@@ -1,0 +1,45 @@
+@Metadata.layer: #CORE
+@UI.createHidden: true
+@UI: { headerInfo: { typeName: 'History',
+                     typeNamePlural: 'Historic',
+                     title:{ type: #STANDARD,
+                             value: 'HisId' }
+                      },
+       presentationVariant: [{ sortOrder: [{ by: 'HisId' ,
+                                             direction: #ASC }],
+                               visualizations: [{ type: #AS_LINEITEM }]
+                               }]
+     }
+
+annotate entity zc_hist_inct_darc with
+
+
+{
+
+  @UI.hidden: true
+  HisUuid;
+  @UI.hidden: true
+  IncUuid;
+  @UI: { lineItem: [{ position: 10,
+                  importance: #HIGH,
+                  label: 'History Id' } ] }
+  HisId;
+  @UI: { lineItem: [{ position: 20,
+                importance: #LOW,
+                label: 'Previous Status' } ] }
+  PreviousStatus;
+  @UI: { lineItem: [{ position: 30,
+                importance: #LOW,
+                label: 'New Status' } ] }
+  NewStatus;
+  @UI: { lineItem: [{ position: 40,
+                importance: #LOW,
+                label: 'Text' } ] }
+  Text;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+  @UI.hidden: true
+  LastChangedAt;
+
+}

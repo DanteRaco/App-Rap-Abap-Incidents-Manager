@@ -2,6 +2,7 @@
 @EndUserText.label: 'Consumption Incidents'
 @Metadata.ignorePropagatedAnnotations: true
 @Metadata.allowExtensions: true
+@Search.searchable: true
 
 define root view entity zc_inct_darc
   provider contract transactional_query
@@ -9,8 +10,18 @@ define root view entity zc_inct_darc
 
 {
   key IncUuid,
+
+      @Search.defaultSearchElement: true
+      @Search.ranking: #MEDIUM
+      @Search.fuzzinessThreshold: 0.8
       IncidentId,
+      @Search.defaultSearchElement: true
+      @Search.ranking: #MEDIUM
+      @Search.fuzzinessThreshold: 0.8
       Title,
+      @Search.defaultSearchElement: true
+      @Search.ranking: #MEDIUM
+      @Search.fuzzinessThreshold: 0.4
       Description,
       Status,
       Priority,
@@ -24,7 +35,7 @@ define root view entity zc_inct_darc
       LastChangedAt,
 
       /* Associations */
-      _IHistory,
+      _IHistory : redirected to composition child zc_hist_inct_darc,
       _Priority,
       _Status
 }
