@@ -2,7 +2,7 @@
 @EndUserText.label: 'Root Entity Incidents'
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity z_r_inct_darc
-  as select from zdt_inct_darc
+  as select from zdt_inct_darc01
 
   composition [0..*] of zi_inct_h_darc   as _IHistory
 

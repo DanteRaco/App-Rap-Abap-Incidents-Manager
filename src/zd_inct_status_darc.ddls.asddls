@@ -3,17 +3,17 @@
 @Search.searchable: true
 
 define view entity zd_inct_status_darc
-  as select from zdt_status_darc
+  as select from zi_inct_status
 {
       @Search.defaultSearchElement: true
-      @ObjectModel.text.element: [ 'status_description' ]
+      @ObjectModel.text.element: [ 'StatusDescription' ]
       @UI.textArrangement: #TEXT_SEPARATE
-      @UI.lineItem: [{ position: 10, importance: #HIGH  }]
-  key status_code,
+      @UI.lineItem: [{ position: 10, label: 'Status Code', importance: #HIGH }]
+  key StatusCode,
 
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.8
       @Semantics.text: true
-      @UI.lineItem: [{ position: 20, importance: #HIGH }]
-      status_description
+      @UI.lineItem: [{ position: 20, label: 'Description', importance: #HIGH }]
+      StatusDescription
 }

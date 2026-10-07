@@ -23,7 +23,16 @@ define root view entity zc_inct_darc
       @Search.ranking: #MEDIUM
       @Search.fuzzinessThreshold: 0.4
       Description,
+
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'zd_inct_status_darc',
+                                               element: 'StatusCode'},
+                                               useForValidation: true }]
+                                             
       Status,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'zd_inc_prior_darc',
+                                               element: 'PriorityCode'},
+                                               useForValidation: true }]
+                                      
       Priority,
       CreationDate,
       ChangedDate,

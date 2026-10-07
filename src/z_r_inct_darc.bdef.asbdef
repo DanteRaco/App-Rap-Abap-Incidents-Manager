@@ -3,8 +3,8 @@ strict ( 2 );
 with draft;
 
 define behavior for z_r_inct_darc alias incident
-persistent table zdt_inct_darc
-draft table zdt_inct_darc_d
+persistent table zdt_inct_darc01
+draft table zdt_inct_darc_d1
 lock master
 total etag LastChangedAt
 etag master LocalLastChangedAt
@@ -53,7 +53,7 @@ authorization master ( global, instance )
   { validation validateRequiredFields;
     validation validateDateRange; }
 
-  mapping for zdt_inct_darc
+  mapping for zdt_inct_darc01
     {
       incuuid            = inc_uuid;
       incidentid         = incident_id;
