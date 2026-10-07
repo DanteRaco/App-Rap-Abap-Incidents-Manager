@@ -7,7 +7,6 @@
 define root view entity zc_inct_darc
   provider contract transactional_query
   as projection on z_r_inct_darc
-
 {
   key IncUuid,
 
@@ -15,25 +14,43 @@ define root view entity zc_inct_darc
       @Search.ranking: #MEDIUM
       @Search.fuzzinessThreshold: 0.8
       IncidentId,
+      
       @Search.defaultSearchElement: true
       @Search.ranking: #MEDIUM
       @Search.fuzzinessThreshold: 0.8
       Title,
+      
       @Search.defaultSearchElement: true
       @Search.ranking: #MEDIUM
       @Search.fuzzinessThreshold: 0.4
       Description,
 
-      @Consumption.valueHelpDefinition: [{ entity: { name: 'zd_inct_status_darc',
-                                               element: 'StatusCode'},
-                                               useForValidation: true }]
-                                             
+      @Consumption.valueHelpDefinition: [{ 
+        entity: { 
+          name:    'zd_inct_status_darc',
+          element: 'StatusCode'
+        },
+        useForValidation: true 
+      }]
+      @ObjectModel.text.element: ['StatusDescription']
+      @UI.textArrangement: #TEXT_SEPARATE
       Status,
-      @Consumption.valueHelpDefinition: [{ entity: { name: 'zd_inc_prior_darc',
-                                               element: 'PriorityCode'},
-                                               useForValidation: true }]
-                                      
+      
+      _Status.StatusDescription as StatusDescription,
+
+      @Consumption.valueHelpDefinition: [{ 
+        entity: { 
+          name:    'zd_inc_prior_darc',
+          element: 'PriorityCode'
+        },
+        useForValidation: true 
+      }]
+      @ObjectModel.text.element: ['PriorityDescription']
+      @UI.textArrangement: #TEXT_SEPARATE
       Priority,
+      
+      _Priority.PriorityDescription as PriorityDescription,
+
       CreationDate,
       ChangedDate,
 
